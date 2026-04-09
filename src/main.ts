@@ -2,17 +2,7 @@ import * as core from '@actions/core'
 import {Octokit} from '@octokit/rest'
 import axios from 'axios'
 import moment from 'moment-timezone'
-import {createMessageCard} from './message-card'
-
-const escapeMarkdownTokens = (text: string) =>
-  text
-    .replace(/\n\ {1,}/g, '\n ')
-    .replace(/\_/g, '\\_')
-    .replace(/\*/g, '\\*')
-    .replace(/\|/g, '\\|')
-    .replace(/#/g, '\\#')
-    .replace(/-/g, '\\-')
-    .replace(/>/g, '\\>')
+import {createAdaptiveCard} from './message-card'
 
 async function run(): Promise<void> {
   try {
@@ -21,9 +11,7 @@ async function run(): Promise<void> {
       required: true
     })
 
-    const notificationSummary =
-      core.getInput('notification-summary') || 'GitHub Action Notification'
-    const notificationColor = core.getInput('notification-color') || '0b93ff'
+    const stepOutcome = core.getInput('state')
     const timezone = core.getInput('timezone') || 'UTC'
     const verboseLogging = core.getInput('verbose-logging') == 'true'
     const timestamp = moment()
@@ -42,9 +30,7 @@ async function run(): Promise<void> {
     const commit = await octokit.repos.getCommit(params)
     const author = commit.data.author
 
-    const messageCard = await createMessageCard(
-      notificationSummary,
-      notificationColor,
+    const messageCard = await createAdaptiveCard(
       commit,
       author,
       runNum,
@@ -52,7 +38,8 @@ async function run(): Promise<void> {
       repoName,
       sha,
       repoUrl,
-      timestamp
+      timestamp,
+      stepOutcome
     )
 
     if (verboseLogging) {
