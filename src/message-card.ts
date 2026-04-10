@@ -10,6 +10,8 @@ function getOutcomeColor(outcome: string): string {
       return 'warning'
     case 'skipped':
       return 'accent'
+    default:
+      return 'default'
   }
 }
 
@@ -23,6 +25,8 @@ function getOutcomeLabel(outcome: string): string {
       return '⊘ Tests cancelled'
     case 'skipped':
       return '⊖ Tests skipped'
+    default:
+      return outcome
   }
 }
 
