@@ -89,12 +89,10 @@ export function createAdaptiveCard(
                 weight: 'Bolder'
               },
               {
-                type: 'TextBlock',
+                type: 'Badge',
                 text: getOutcomeLabel(testOutcome),
-                wrap: false,
-                weight: 'Bolder',
-                color: getOutcomeColor(testOutcome),
-                spacing: 'Small'
+                size: 'Large',
+                style: getOutcomeColor(testOutcome)
               },
               {
                 type: 'TextBlock',
