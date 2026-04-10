@@ -11,12 +11,6 @@ inputs:
   ms-teams-webhook-uri:
     description: 'Microsoft Teams Webhook URI'
     required: true 
-  notification-summary:
-    description: 'Message to be sent to Microsoft Teams channel'
-    required: true 
-  notification-color:
-    description: 'Color of notification header line'
-    required: true 
   timezone:
     description: 'Timezone (ex. America/Denver)'
     required: false
@@ -24,6 +18,9 @@ inputs:
     description: 'Enable verbose logging'
     default: 'false'
     required: false
+  state:
+    description: 'Outcome of the step (ex. success, failure, cancelled)'
+    required: true
 runs:
   using: 'node20'
   main: 'dist/index.js'

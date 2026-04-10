@@ -1,20 +1,28 @@
 type StepOutcome = 'success' | 'failure' | 'cancelled' | 'skipped'
 
-function getOutcomeColor(outcome: StepOutcome): string {
+function getOutcomeColor(outcome: string): string {
   switch (outcome) {
-    case 'success':   return 'good'
-    case 'failure':   return 'attention'
-    case 'cancelled': return 'warning'
-    case 'skipped':   return 'accent'
+    case 'success':
+      return 'good'
+    case 'failure':
+      return 'attention'
+    case 'cancelled':
+      return 'warning'
+    case 'skipped':
+      return 'accent'
   }
 }
 
-function getOutcomeLabel(outcome: StepOutcome): string {
+function getOutcomeLabel(outcome: string): string {
   switch (outcome) {
-    case 'success':   return '✔ Tests passed'
-    case 'failure':   return '✘ Tests failed'
-    case 'cancelled': return '⊘ Tests cancelled'
-    case 'skipped':   return '⊖ Tests skipped'
+    case 'success':
+      return '✔ Tests passed'
+    case 'failure':
+      return '✘ Tests failed'
+    case 'cancelled':
+      return '⊘ Tests cancelled'
+    case 'skipped':
+      return '⊖ Tests skipped'
   }
 }
 
@@ -27,7 +35,7 @@ export function createAdaptiveCard(
   sha: string,
   repoUrl: string,
   timestamp: string,
-  testOutcome: StepOutcome
+  testOutcome: string
 ): any {
   let avatar_url =
     'https://www.gravatar.com/avatar/05b6d8cc7c662bf81e01b39254f88a48?d=identicon'
@@ -66,7 +74,10 @@ export function createAdaptiveCard(
             items: [
               {
                 type: 'TextBlock',
-                text: `**CI #${runNum} (commit ${sha.substr(0, 7)})** on [${repoName}](${repoUrl})`,
+                text: `**CI #${runNum} (commit ${sha.substr(
+                  0,
+                  7
+                )})** on [${repoName}](${repoUrl})`,
                 wrap: true,
                 weight: 'Bolder'
               },
