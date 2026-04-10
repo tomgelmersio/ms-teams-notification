@@ -145,6 +145,9 @@ function createAdaptiveCard(commit, author, runNum, runId, repoName, sha, repoUr
         type: 'AdaptiveCard',
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
         version: '1.4',
+        msteams: {
+            width: 'Full'
+        },
         body: [
             {
                 type: 'ColumnSet',
